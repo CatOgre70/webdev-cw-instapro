@@ -24,7 +24,7 @@ export function renderPostsPageComponent({ appEl }) {
                         <img src="./assets/images/like-active.svg">
                       </button>
                       <p class="post-likes-text">
-                        Нравится: <strong>${post.likes.reduce((a,b) => a+b, 0)}</strong>
+                        Нравится: <strong>${post.likes.length}</strong>
                       </p>
                     </div>
                     <p class="post-text">
