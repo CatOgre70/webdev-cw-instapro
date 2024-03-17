@@ -2,6 +2,9 @@ import {USER_POSTS_PAGE} from "../routes.js";
 import {renderHeaderComponent} from "./header-component.js";
 import {goToPage, page, posts, user} from "../index.js";
 import {addLike, removeLike} from "../api.js";
+import {formatDistanceToNow} from "date-fns";
+import {ru} from "date-fns/locale";
+import {howManyTimePassed} from "./date-component";
 
 export function renderPostsPageComponent({ appEl }) {
   console.log("Актуальный список постов:", posts);
@@ -33,9 +36,7 @@ export function renderPostsPageComponent({ appEl }) {
                       <span class="user-name">${post.user.name}</span>
                       ${post.description}
                     </p>
-                    <p class="post-date">
-                      19 минут назад
-                    </p>
+                    <p class="post-date">примерно ${howManyTimePassed({date: post.createdAt})} назад</p>
                   </li>`
   }).join("");
   renderHeaderComponent({
