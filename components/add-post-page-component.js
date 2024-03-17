@@ -8,15 +8,15 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
     // TODO: Реализовать страницу добавления поста
     appEl.innerHTML = ` <div class="page-container">
                           <div class="header-container"></div>
-                            <h3 class="form-title">Добавить пост</h3>
-                            <div class="form-inputs">
-                                <div class="upload-image-container"></div>
-                                <label>
-                                    Опишите фотографию
-                                    <textarea class="input textarea" rows="4" id="text-area"></textarea>
-                                </label>
-                            </div>
-                          <button class="button" id="add-button">Добавить</button>
+                          <h3 class="form-title">Добавить пост</h3>
+                          <div class="form-inputs">
+                            <div class="upload-image-container"></div>
+                            <label>
+                              Опишите фотографию
+                              <textarea class="input textarea" rows="4" id="text-area"></textarea>
+                            </label>
+                            <button class="button" id="add-button">Добавить</button>
+                          </div>
                         </div>
                       `;
 

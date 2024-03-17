@@ -22,6 +22,38 @@ export function getPosts({ token }) {
     });
 }
 
+export function addLike({postId, token}){
+  return fetch(`${postsHost}/${postId}/like`, {
+    method: "POST",
+    headers: {
+      Authorization: token,
+    },
+  }).then((response) => {
+    if (response.status === 401) {
+      throw new Error("Нет авторизации");
+    } else if(response.status !== 200) {
+      throw new Error("Что-то с лайками пошло не так!");
+    }
+    return response.json();
+  });
+}
+
+export function removeLike({postId, token}){
+  return fetch(`${postsHost}/${postId}/dislike`, {
+    method: "POST",
+    headers: {
+      Authorization: token,
+    },
+  }).then((response) => {
+    if (response.status === 401) {
+      throw new Error("Нет авторизации");
+    } else if(response.status !== 200) {
+      throw new Error("Что-то с лайками пошло не так!");
+    }
+    return response.json();
+  });
+}
+
 export function addPost({description, imageUrl, token}) {
   return fetch(postsHost, {
     method: "POST",

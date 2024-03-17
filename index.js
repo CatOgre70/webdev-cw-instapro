@@ -10,6 +10,10 @@ export let user = getUserFromLocalStorage();
 export let page = null;
 export let posts = [];
 
+export function setPosts(newPosts){
+  posts = newPosts;
+}
+
 const getToken = () => {
   return user ? `Bearer ${user.token}` : undefined;
 };
@@ -56,11 +60,16 @@ export const goToPage = (newPage, data) => {
     }
 
     if (newPage === USER_POSTS_PAGE) {
-      // TODO: реализовать получение постов юзера из API
+      page = LOADING_PAGE;
+      renderApp();
+
       console.log("Открываю страницу пользователя: ", data.userId);
-      page = USER_POSTS_PAGE;
-      posts = [];
-      return renderApp();
+      return getPosts({token: getToken()})
+          .then((newPosts) => {
+            page = USER_POSTS_PAGE;
+            posts = newPosts.filter((p) => p.user.id === data.userId);
+            renderApp();
+          });
     }
 
     page = newPage;
@@ -115,9 +124,7 @@ const renderApp = () => {
   }
 
   if (page === USER_POSTS_PAGE) {
-    // TODO: реализовать страницу фотографию пользвателя
-    appEl.innerHTML = "Здесь будет страница фотографий пользователя";
-    return;
+    return renderPostsPageComponent({appEl});
   }
 };
 
