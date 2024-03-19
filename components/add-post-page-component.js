@@ -1,11 +1,11 @@
 import {renderHeaderComponent} from "./header-component.js";
 import {renderUploadImageComponent} from "./upload-image-component.js";
+import {validateString} from "./validating-user-input.js";
 
 export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
   let imageDescription = "";
   let imageUrl = "";
   const render = () => {
-    // TODO: Реализовать страницу добавления поста
     appEl.innerHTML = ` <div class="page-container">
                           <div class="header-container"></div>
                           <h3 class="form-title">Добавить пост</h3>
@@ -21,7 +21,7 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
                       `;
 
     document.getElementById("add-button").addEventListener("click", () => {
-      imageDescription = document.getElementById("text-area").value;
+      imageDescription = validateString(document.getElementById("text-area").value);
       onAddPostClick({
         description: imageDescription,
         imageUrl: imageUrl,

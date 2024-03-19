@@ -1,6 +1,7 @@
 import {loginUser, registerUser} from "../api.js";
 import {renderHeaderComponent} from "./header-component.js";
 import {renderUploadImageComponent} from "./upload-image-component.js";
+import {validateLoginName, validateUserPassword} from "./validating-user-input";
 
 export function renderAuthPageComponent({ appEl, setUser }) {
   let isLoginMode = true;
@@ -64,8 +65,8 @@ export function renderAuthPageComponent({ appEl, setUser }) {
       setError("");
 
       if (isLoginMode) {
-        const login = document.getElementById("login-input").value;
-        const password = document.getElementById("password-input").value;
+        const login = validateLoginName(document.getElementById("login-input").value);
+        const password = validateUserPassword(document.getElementById("password-input").value);
 
         if (!login) {
           alert("Введите логин");
